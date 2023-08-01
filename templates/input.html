@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>留言論壇</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #navbar h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        #navbar #user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar #user-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        #messageList {
+            width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            /* 留言列表的背景顏色為白色 */
+            border: 1px solid #ddd;
+        }
+
+        #messageList .message {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        #messageList .message strong {
+            color: #0066cc;
+        }
+
+        #messageForm {
+            width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            /* 留言表單的背景顏色為白色 */
+            border: 1px solid #ddd;
+        }
+
+        #messageForm input,
+        #messageForm textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #messageForm #sendBtn {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <h1>留言論壇</h1>
+        <div id="user-info">
+            <img src="https://via.placeholder.com/30" alt="User Avatar">
+            <span id="username">{{username}}</span>
+        </div>
+    </div>
+
+    <div id="messageList">
+        <div class="message"><strong>User1：</strong>這是一則留言。</div>
+        <div class="message"><strong>User2：</strong>這是另一則留言。</div>
+        <!-- 這裡可以用後端代碼來動態生成留言 -->
+    </div>
+
+    <div id="messageForm">
+        <input type="text" id="usernameInput" placeholder="請輸入您的名稱" />
+        <textarea id="messageInput" placeholder="請輸入您的留言"></textarea>
+        <button id="sendBtn">發送留言</button>
+    </div>
+
+    <script>
+        // 這裡的 username 是從後端獲取的用戶名
+        const username = document.getElementById("username").textContent; // 假設使用者名稱是 John Doe
+        // 在這裡添加後端代碼來處理用戶留言和論壇信息的發送/接收
+
+        // 當發送按鈕被點擊時處理發送留言
+        document.getElementById("sendBtn").addEventListener("click", function () {
+            const messageInput = document.getElementById("messageInput");
+            const message = messageInput.value.trim();
+
+            if (username !== "" && message !== "") {
+                // 在這裡添加代碼以發送留言到後端
+                // 例如，可以使用 WebSocket 或 AJAX 來傳遞留言
+
+                // 模擬添加留言到留言列表
+                displayMessage(username, message);
+
+                // 清空表單
+                messageInput.value = "";
+            }
+        });
+
+        // 用於在留言列表中顯示留言
+        function displayMessage(user, message) {
+            const messageList = document.getElementById("messageList");
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.innerHTML = `<strong>${user}：</strong>${message}`;
+            messageList.appendChild(messageElement);
+        }
+
+    </script>
+</body>
+
+</html>
